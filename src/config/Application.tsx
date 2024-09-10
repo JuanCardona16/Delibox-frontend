@@ -1,12 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Suspense } from "react"
+import Router from "./routes/AplicationRoutes"
 
 function Application() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<h1>Hellow reactJS</h1>} />
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={<div>Cargando...</div>}>
+      <Router />
+    </Suspense>
   )
 }
 

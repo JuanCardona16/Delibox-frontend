@@ -1,55 +1,68 @@
 import { PUBLIC_ROUTES } from "@/config/constants";
-import { SubmitHandler, useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import styles from './register.module.css'
 
 type Inputs = {
   username: string;
   email: string;
   password: string;
-}
+};
 
 const Register = () => {
-  const { register, handleSubmit } = useForm<Inputs>()
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // Handle form submission
-    console.log(data)
+    console.log(data);
 
-    const RegisterService = async (data: Inputs) => fetch(`http://localhost:3000/api/auth/register`, { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-     })
+    const RegisterService = async (data: Inputs) =>
+      fetch(`http://localhost:3000/api/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-     RegisterService(data).then(response => response.json()).then(response => console.log(response))
-  }
+    RegisterService(data)
+      .then((response) => response.json())
+      .then((response) => console.log(response));
+  };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} method="POST">
-        <input 
+    <div className={styles.container}>
+      <h2>Crear una cuenta</h2>
+      <form onSubmit={handleSubmit(onSubmit)} method="POST" className={styles.form}>
+        <label htmlFor="username">Nombre de usuario</label>
+        <input
+          className={styles.input}
+          id="username"
           type="text"
-          placeholder="Alexander"
-          {...register('username', { 
-              required: true
-            })
-          }
+          placeholder="nombre de usuario"
+          {...register('username', {
+            required: true
+          })
+        }
         />
-        <input 
+        <label htmlFor="email">Correo electronico</label>
+        <input
+          className={styles.input}
+          id="email"
           type="email"
-          placeholder="example@example.com"
-          {...register('email', { 
+          placeholder="Correo electrónico"
+          {...register('email', {
               required: true,
               pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             })
           }
         />
-        <input 
+        <label htmlFor="password">Contraseña</label>
+        <input
+          className={styles.input}
           type="text"
-          placeholder="algorithm"
-          {...register('password', { 
+          id="password"
+          placeholder="Contraseña"
+          {...register('password', {
               required: true,
               minLength: 6,
               pattern: /^\S*$/,
@@ -65,12 +78,12 @@ const Register = () => {
             })
           }
         />
-        
-        <button type="submit">register</button>
-      </form>
-      <p>Do have an account? <Link to={`/${PUBLIC_ROUTES.LOGIN}`}>login here</Link></p>
-    </div>
-  )
-}
 
-export default Register
+        <button type="submit" className={styles.formButton}>Crear cuenta</button>
+      </form>
+      <p>Ya tienes una cuenta? <Link to={`${PUBLIC_ROUTES.LOGIN}`}>Inicia sesión aqui</Link></p>
+    </div>
+  );
+};
+
+export default Register;

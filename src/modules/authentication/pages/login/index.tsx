@@ -1,68 +1,79 @@
 import { PUBLIC_ROUTES } from "@/config/constants";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useLogin } from "./../../hooks";
+import styles from "./login.module.css";
 
 type Inputs = {
   email: string;
   password: string;
-}
+};
 
 const Login = () => {
-
-  const { register, handleSubmit } = useForm<Inputs>()
+  const { register, handleSubmit } = useForm<Inputs>();
+  const { login, isPending } = useLogin();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // Handle form submission
-    console.log(data)
+    console.log(data);
 
-    const LoginService = async (data: Inputs) => fetch(`http://localhost:3000/api/auth/login`, { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-     })
+    if (data.email !== "" && data.password !== "") {
+      login(data);
+    }
+  };
 
-     LoginService(data).then(response => response.json()).then(response => console.log(response))
-  }
+  if (isPending) return <div>Cargando...</div>;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)} method="POST">
-        <input 
+    <div className={styles.container}>
+      <h2>Iniciar sesión</h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        method="POST"
+        className={styles.form}
+      >
+        <label htmlFor="email">Correo electronico</label>
+        <input
+          className={styles.input}
+          id="email"
           type="email"
-          placeholder="example@example.com"
-          {...register('email', { 
-              required: true,
-              pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            })
-          }
+          placeholder="Correo electrónico"
+          {...register("email", {
+            required: true,
+            pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+          })}
         />
-        <input 
+        <label htmlFor="password">Contraseña</label>
+        <input
+          className={styles.input}
+          id="password"
           type="text"
-          placeholder="algorithm"
-          {...register('password', { 
-              required: true,
-              minLength: 6,
-              pattern: /^\S*$/,
-              validate: {
-                format: (password) => {
-                  return (
-                    /[A-Z]/g.test(password) &&
-                    /[a-z]/g.test(password) &&
-                    /[0-9]/g.test(password)
-                  );
-                }
-              }
-            })
-          }
+          placeholder="contraseña"
+          {...register("password", {
+            required: true,
+            minLength: 6,
+            pattern: /^\S*$/,
+            validate: {
+              format: (password) => {
+                return (
+                  /[A-Z]/g.test(password) &&
+                  /[a-z]/g.test(password) &&
+                  /[0-9]/g.test(password)
+                );
+              },
+            },
+          })}
         />
-        
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <Link to={`/${PUBLIC_ROUTES.REGISTER}`}>Register here</Link></p>
-    </div>
-  )
-}
 
-export default Login
+        <button type="submit" className={styles.formButton}>
+          Iniciar sesión
+        </button>
+      </form>
+      <p>
+        No tienes una cuenta?{" "}
+        <Link to={`${PUBLIC_ROUTES.REGISTER}`}>Registrate aqui</Link>
+      </p>
+    </div>
+  );
+};
+
+export default Login;

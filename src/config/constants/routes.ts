@@ -2,6 +2,9 @@
 export const AuthPrefixApiRoutes = "/auth";
 export const UserPrefixApiRoutes = "/user";
 
+export const LoginPrefixApiRoutes = `${AuthPrefixApiRoutes}/login`
+export const RegisterPrefixApiRoutes = `${AuthPrefixApiRoutes}/register`
+
 // Rutas para react
 export const PUBLIC_ROUTES = {
   LOGIN: "/iniciar-sesion",

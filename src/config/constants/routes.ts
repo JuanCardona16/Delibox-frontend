@@ -7,8 +7,8 @@ export const RegisterPrefixApiRoutes = `${AuthPrefixApiRoutes}/register`
 
 // Rutas para react
 export const PUBLIC_ROUTES = {
-  LOGIN: "iniciar-sesion",
-  REGISTER: "registrarse",
+  LOGIN: "/iniciar-sesion",
+  REGISTER: "/registrarse",
 };
 
 export const PRIVATE_ROUTES = {

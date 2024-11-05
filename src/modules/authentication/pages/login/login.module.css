@@ -1,0 +1,48 @@
+.container {
+  background: rgb(244, 239, 239);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form .input {
+  padding: .5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: .3rem;
+}
+
+.form .input:focus {
+  border: 1px solid gray;
+}
+
+.formButton {
+  background: rgb(0, 149, 255); 
+  padding: .5rem 1rem;
+  border-radius: .3rem;
+  color: rgb(3, 3, 3);
+  font-weight: 600;
+}
+
+.container > p > a {
+  color: rgb(0, 149, 255);
+}

@@ -1,1 +1,2 @@
-export * from './RoutesWithNotFound/RoutesWithNotFound';
+export * from "./rootLayout/LayoutRoot";
+export * from "./RoutesWithNotFound/RoutesWithNotFound";

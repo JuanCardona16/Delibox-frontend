@@ -1,0 +1,32 @@
+.container {
+  background: rgb(244, 239, 239);
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 5rem;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.menu {
+  background: #fff;
+  padding: 1rem 2rem; 
+}
+
+.menu ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  font-size: .9rem;
+}
